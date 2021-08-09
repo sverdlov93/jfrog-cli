@@ -1,12 +1,7 @@
-# This is a basic workflow to help you get started with Actions
-
 name: TESTMI
-
-# Trigger the workflow on milestone events
 on: 
   milestone:
     types: [closed]
-name: Milestone Closure
 jobs:
   create-release-notes:
     runs-on: ubuntu-latest
