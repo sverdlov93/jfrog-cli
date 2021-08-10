@@ -18,7 +18,7 @@ jobs:
       - name: Create Release Notes
         uses: Decathlon/release-notes-generator-action@v3.1.5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
           OUTPUT_FOLDER: temp_release_notes
           #USE_MILESTONE_TITLE: "true"
           FILENAME: "my_custom_file"
