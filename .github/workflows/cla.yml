@@ -12,10 +12,13 @@ jobs:
   release-notes:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug Action
+        uses: hmarr/debug-action@v1.0.0
       - uses: actions/checkout@master
-      - name: Release notes generator
-        uses: Decathlon/release-notes-generator-action@v3.1.5
+      - name: Create Release Notes
+        uses: focus-shift/release-notes-generator-action@28-define-own-markdown-name
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OUTPUT_FOLDER: temp_release_notes
-          USE_MILESTONE_TITLE: "true"
+          #USE_MILESTONE_TITLE: "true"
+          FILENAME: "my_custom_file"
