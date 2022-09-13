@@ -1,0 +1,22 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+steps:
+- task: JFrogMaven@1
+  inputs:
+    mavenPomFile: './testdata/maven/mavenproject/pom.xml'
+    goals: 'package'
+    artifactoryResolverService: 'jfrog artifactory'
+    targetResolveReleaseRepo: 'maven-virtual'
+    targetResolveSnapshotRepo: 'maven-virtual'
+
