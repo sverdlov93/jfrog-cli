@@ -5,6 +5,10 @@
 trigger:
 - master
 
+
+pool:
+  vmImage: windows-latest
+
 resources:
 - repo: self
 
