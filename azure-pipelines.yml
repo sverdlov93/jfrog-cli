@@ -14,9 +14,17 @@ variables:
 steps:
 - task: JFrogMaven@1
   inputs:
-    mavenPomFile: './testdata/maven/mavenproject/pom.xml'
+    mavenPomFile: '$(Build.Repository.LocalPath)/testdata/mavenproject/pom.xml'
     goals: 'package'
     artifactoryResolverService: 'jfrog artifactory'
     targetResolveReleaseRepo: 'maven-virtual'
     targetResolveSnapshotRepo: 'maven-virtual'
+    
+- task: JFrogMaven@1
+  inputs:
+    mavenPomFile: './testdata/mavenproject/pom.xml'
+    goals: 'package'
+    artifactoryResolverService: 'jfrog artifactory'
+    targetResolveReleaseRepo: 'maven-virtual'
+    targetResolveSnapshotRepo: 'maven-virtual'    
 
