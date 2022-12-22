@@ -531,10 +531,6 @@ github.com/jfrog/build-info-go v1.8.4 h1:OisVjARmaXzXV9IuGvNJzB0XL8a6RVSrR2/zOsR
 github.com/jfrog/build-info-go v1.8.4/go.mod h1:iSTj26qEX3eUtyAGMH0qKsW4WJT+MceYxLWP9FfiAq4=
 github.com/jfrog/gofrog v1.2.5 h1:jCgJC0iGQ8bU7jCC+YEFJTNINyngApIrhd8BjZAVRIE=
 github.com/jfrog/gofrog v1.2.5/go.mod h1:o00tSRff6IapTgaCMuX1Cs9MH08Y1JqnsKgRtx91Gc4=
-github.com/jfrog/jfrog-cli-core/v2 v2.26.1-0.20221221143936-16ac1a6e8dfc h1:oWPDFczH8d/7L8J2Bh2K5vc4CT0t1nAeJfW5nsgE4a0=
-github.com/jfrog/jfrog-cli-core/v2 v2.26.1-0.20221221143936-16ac1a6e8dfc/go.mod h1:l0yqFZ91rgaip+naVdcPEmtz0TmndUZy7KjMlj0zR2k=
-github.com/jfrog/jfrog-client-go v1.24.6-0.20221220103903-e88b2cabc054 h1:Zyc7lbS0CgAs0LJYC0QHwkRTIPDQXgRcZNAbIEztxak=
-github.com/jfrog/jfrog-client-go v1.24.6-0.20221220103903-e88b2cabc054/go.mod h1:jCif5JAnF3RZ+ldzJ+0jX1OCcrXzJVjWHENVGyiy6nI=
 github.com/jmespath/go-jmespath v0.0.0-20160202185014-0b12d6b521d8/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/jmespath/go-jmespath v0.0.0-20160803190731-bd40a432e4c7/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/joefitzgerald/rainbow-reporter v0.1.0/go.mod h1:481CNgqmVHQZzdIbN52CupLJyoVwB10FQ/IQlF1pdL8=
@@ -829,6 +825,10 @@ github.com/stretchr/testify v1.8.0 h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PK
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/subosito/gotenv v1.3.0 h1:mjC+YW8QpAdXibNi+vNWgzmgBH4+5l5dCXv8cNysBLI=
 github.com/subosito/gotenv v1.3.0/go.mod h1:YzJjq/33h7nrwdY+iHMhEOEEbW0ovIz0tB6t6PwAXzs=
+github.com/sverdlov93/jfrog-cli-core/v2 v2.0.2-0.20221222104446-a3468f209c5e h1:uA7tjjycVIc6ThiDuWGydumAq5i1LlHBB64f3LcOKkU=
+github.com/sverdlov93/jfrog-cli-core/v2 v2.0.2-0.20221222104446-a3468f209c5e/go.mod h1:sr6Sc79W1TRFlL2i9VxF9jlyt97ZY98So8IXxC8kdwk=
+github.com/sverdlov93/jfrog-client-go v1.0.2-0.20221222085606-37a44c9f417e h1:3a8xhYdts1ODD9R+GCHWQCXQP8UEBYMhqpbgFwUNNCs=
+github.com/sverdlov93/jfrog-client-go v1.0.2-0.20221222085606-37a44c9f417e/go.mod h1:jCif5JAnF3RZ+ldzJ+0jX1OCcrXzJVjWHENVGyiy6nI=
 github.com/syndtr/gocapability v0.0.0-20170704070218-db04d3cc01c8/go.mod h1:hkRG7XYTFWNJGYcbNJQlaLq0fg1yr4J4t/NcTQtrfww=
 github.com/syndtr/gocapability v0.0.0-20180916011248-d98352740cb2/go.mod h1:hkRG7XYTFWNJGYcbNJQlaLq0fg1yr4J4t/NcTQtrfww=
 github.com/syndtr/gocapability v0.0.0-20200815063812-42c35b437635/go.mod h1:hkRG7XYTFWNJGYcbNJQlaLq0fg1yr4J4t/NcTQtrfww=
