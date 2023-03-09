@@ -7,7 +7,7 @@ trigger:
 
 
 pool:
-  vmImage: windows-latest
+  vmImage: mac-latest
 
 resources:
 - repo: self
@@ -16,11 +16,15 @@ variables:
   tag: '$(Build.BuildId)'
 
 steps:
+- task: JFrogToolsInstaller@1
+  inputs:
+    artifactoryConnection: 'jfrog v2 extension ecosys'
+    cliInstallationRepo: 'jfrog-cli-virtual'
 - task: JFrogMaven@1
   inputs:
     mavenPomFile: '$(Build.Repository.LocalPath)/testdata/mavenproject/pom.xml'
     goals: 'package'
-    artifactoryResolverService: 'jfrog artifactory'
+    artifactoryResolverService: 'jfrog v2 extension ecosys'
     targetResolveReleaseRepo: 'maven-virtual'
     targetResolveSnapshotRepo: 'maven-virtual'
 
