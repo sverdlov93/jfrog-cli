@@ -28,3 +28,9 @@ steps:
     targetResolveReleaseRepo: 'maven-virtual'
     targetResolveSnapshotRepo: 'maven-virtual'
 
+- task: JFrogAudit@1
+  inputs:
+    xrayConnection: 'xrayv2'
+    watchesSource: 'none'
+    licenses: false
+    allowFailBuild: true
