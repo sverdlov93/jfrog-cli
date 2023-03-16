@@ -7,7 +7,7 @@ trigger:
 
 
 pool:
-  vmImage: macOS-latest
+  vmImage: ubuntu-latest
 
 resources:
 - repo: self
@@ -16,13 +16,13 @@ variables:
   tag: '$(Build.BuildId)'
 
 steps:
-- task: JFrogToolsInstaller@1
-  inputs:
-    artifactoryConnection: 'jfrog v2 extension ecosys'
-    cliInstallationRepo: 'jfrog-cli-virtual'
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: '17.09.0-ce'
+#- task: JFrogToolsInstaller@1
+# inputs:
+#   artifactoryConnection: 'jfrog v2 extension ecosys'
+#   cliInstallationRepo: 'jfrog-cli-virtual'
+# task: DockerInstaller@0
+# inputs:
+#   dockerVersion: '17.09.0-ce'
 
 - task: JFrogDocker@1
   inputs:
