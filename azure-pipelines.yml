@@ -28,6 +28,16 @@ steps:
     targetResolveReleaseRepo: 'maven-virtual'
     targetResolveSnapshotRepo: 'maven-virtual'
 
+- task: JFrogDocker@1
+  inputs:
+    command: 'Pull'
+    artifactoryConnection: 'jfrog v2 extension ecosys'
+    imageName: 'ecosysjfrog.jfrog.io/docker-virtual/node:16-alpine3.17'
+    collectBuildInfo: true
+    buildName: 'docker-infra-images'
+    buildNumber: 'cdpq-infra-docker-images'
+    module: 'cdpq-node-16-alpine3.17'
+    skipLogin: false
 - task: JFrogAudit@1
   inputs:
     xrayConnection: 'xrayv2'
