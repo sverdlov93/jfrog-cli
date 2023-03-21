@@ -16,27 +16,24 @@ variables:
   tag: '$(Build.BuildId)'
 
 steps:
-#- task: JFrogToolsInstaller@1
-# inputs:
-#   artifactoryConnection: 'jfrog v2 extension ecosys'
-#   cliInstallationRepo: 'jfrog-cli-virtual'
-# task: DockerInstaller@0
-# inputs:
-#   dockerVersion: '17.09.0-ce'
+- task: JFrogToolsInstaller@1
+ inputs:
+   artifactoryConnection: 'jfrog v2 extension ecosys'
+   cliInstallationRepo: 'jfrog-cli-virtual'
 
-- task: JFrogDocker@1
-  inputs:
-    command: 'Pull'
-    artifactoryConnection: 'jfrog v2 extension ecosys'
-    imageName: 'ecosysjfrog.jfrog.io/docker-remote/node:16-alpine3.16'
-    collectBuildInfo: true
-    buildName: 'docker-infra-images234'
-    buildNumber: 'cdpq-infra-docker-images235'
-    module: 'cdpq-node-16-alpine3.163'
-    skipLogin: false
+
 - task: JFrogAudit@1
   inputs:
     xrayConnection: 'xrayv2'
     watchesSource: 'none'
     licenses: false
     allowFailBuild: true
+
+- task: JfrogCliV2@1
+  inputs:
+    jfrogPlatformConnection: 'JFrog Platform V2'
+    useCustomVersion: true
+    cliVersion: 'latest'
+    command: |
+      jf rt ping
+      jf audit
