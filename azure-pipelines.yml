@@ -24,6 +24,7 @@ steps:
     licenses: false
     allowFailBuild: true
 
+
 - task: JfrogCliV2@1
   inputs:
     jfrogPlatformConnection: 'JFrog Platform V2'
