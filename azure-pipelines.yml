@@ -30,6 +30,4 @@ steps:
     jfrogPlatformConnection: 'JFrog Platform V2'
     useCustomVersion: true
     cliVersion: 'latest'
-    command: |
-      jf rt ping
-      jf audit
+    command: jf audit
