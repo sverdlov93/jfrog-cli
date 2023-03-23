@@ -29,5 +29,5 @@ steps:
   inputs:
     jfrogPlatformConnection: 'JFrog Platform V2'
     useCustomVersion: true
-    cliVersion: 'latest'
+    cliVersion: '2.34.0'
     command: jf audit
