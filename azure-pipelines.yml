@@ -20,7 +20,9 @@ steps:
   inputs:
     artifactoryConnection: 'jfrog v2 extension ecosys'
     cliInstallationRepo: 'jfrog-cli-virtual'
-   
+    installCustomVersion: true
+    cliVersion: '2.34.6'
+    
 - task: JFrogAudit@1
   inputs:
     xrayConnection: 'xrayv2'
