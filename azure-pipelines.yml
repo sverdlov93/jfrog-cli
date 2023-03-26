@@ -16,6 +16,10 @@ variables:
   tag: '$(Build.BuildId)'
 
 steps:
+- task: JFrogToolsInstaller@1
+  inputs:
+    artifactoryConnection: 'jfrog v2 extension ecosys'
+    cliInstallationRepo: 'jfrog-cli-virtual'
    
 - task: JFrogAudit@1
   inputs:
