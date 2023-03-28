@@ -38,21 +38,14 @@ steps:
     cliVersion: '2.34.0'
     command: jf audit
 
-- task: JFrogMaven@1
+- task: JFrogGo@1
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'install'
-    artifactoryResolverService: 'jfrog v2 extension ecosys'
-    targetResolveReleaseRepo: 'maven-virtual'
-    targetResolveSnapshotRepo: 'maven-virtual'
-    artifactoryDeployService: 'jfrog v2 extension ecosys'
-    targetDeployReleaseRepo: 'maven-virtual'
-    targetDeploySnapshotRepo: 'maven-virtual'
+    command: 'build'
+    artifactoryConnection: 'jfrog v2 extension ecosys'
+    resolutionRepo: 'go-virtual'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    includeEnvVars: true
-    javaHomeOption: 'JDKVersion'
 - task: JFrogPublishBuildInfo@1
   inputs:
     artifactoryConnection: 'jfrog v2 extension ecosys'
