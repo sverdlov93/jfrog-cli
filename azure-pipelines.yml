@@ -23,21 +23,6 @@ steps:
     installCustomVersion: true
     cliVersion: '2.36.0'
     
-- task: JFrogAudit@1
-  inputs:
-    xrayConnection: 'xrayv2'
-    watchesSource: 'none'
-    licenses: false
-    allowFailBuild: true
-
-
-- task: JfrogCliV2@1
-  inputs:
-    jfrogPlatformConnection: 'JFrog Platform V2'
-    useCustomVersion: true
-    cliVersion: '2.34.0'
-    command: jf audit
-
 - task: JFrogGo@1
   inputs:
     command: 'build'
@@ -51,3 +36,17 @@ steps:
     artifactoryConnection: 'jfrog v2 extension ecosys'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
+- task: JFrogAudit@1
+  inputs:
+    xrayConnection: 'xrayv2'
+    watchesSource: 'none'
+    licenses: false
+    allowFailBuild: true
+
+
+- task: JfrogCliV2@1
+  inputs:
+    jfrogPlatformConnection: 'JFrog Platform V2'
+    useCustomVersion: true
+    cliVersion: '2.34.0'
+    command: jf audit    
