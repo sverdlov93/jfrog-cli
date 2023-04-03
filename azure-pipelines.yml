@@ -44,3 +44,7 @@ steps:
     useCustomVersion: true
     cliVersion: '2.34.0'
     command: jf audit    
+- task: JfrogCliV2@1
+  inputs:
+    jfrogPlatformConnection: 'ecosys platform pass'
+    command: 'jf audit'
