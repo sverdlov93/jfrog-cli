@@ -15,11 +15,11 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
 
-steps:
+steps:  
 - task: JFrogToolsInstaller@1
   inputs:
     artifactoryConnection: 'jfrog v2 extension ecosys'
-    cliInstallationRepo: 'jfrog-cli-virtual'    
+    cliInstallationRepo: 'releases-remote'
 - task: JFrogGo@1
   inputs:
     command: 'build'
