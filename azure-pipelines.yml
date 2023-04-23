@@ -19,7 +19,7 @@ steps:
 - task: JFrogToolsInstaller@1
   inputs:
     artifactoryConnection: 'jfrog v2 extension ecosys'
-    cliInstallationRepo: 'jfrog-cli-remote'
+    cliInstallationRepo: 'jfrog-cli-virtual'
     installCustomVersion: true
     cliVersion: '2.37.0'
 - task: JFrogGo@1
