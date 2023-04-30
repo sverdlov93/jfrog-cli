@@ -28,6 +28,7 @@ steps:
     jfrogPlatformConnection: 'JFrog Platform V2'
     command: |
       jf rt ping
+      jf audit
       jf rt ping
 - task: JFrogGo@1
   inputs:
