@@ -27,9 +27,11 @@ steps:
   inputs:
     jfrogPlatformConnection: 'JFrog Platform V2'
     command: |
-      jf rt ping
-      jf audit
-      jf rt ping
+      jf rt go-config --repo-resolve=go-remote --repo-deploy=go-local
+      jf rt go build --build-name=azuretestbuild --build-number=1 
+      jf rt gp go-local v1.0.0 --build-name=azuretestbuild --build-number=1
+      jf rt bce azuretestbuild 1
+      jf rt bp azuretestbuild 1
 - task: JFrogGo@1
   inputs:
     command: 'build'
