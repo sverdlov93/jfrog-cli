@@ -16,6 +16,15 @@ variables:
   tag: '$(Build.BuildId)'
 
 steps:  
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+- task: JfrogCliV2@1
+  inputs:
+    jfrogPlatformConnection: 'JFrog Platform V2'
+    command: |
+      jf terraform-config --repo-resolve=terraform-remote 
+      jf terraform publish --namespace=example --provider=aws --tag=v0.0.1
 
 - task: JfrogCliV2@1
   inputs:
