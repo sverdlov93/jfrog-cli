@@ -22,10 +22,10 @@ steps:
     jfrogPlatformConnection: 'JFrog Platform V2'
     command: |
       jf go-config --repo-resolve=go-remote --repo-deploy=go-local 
-      jf go build --build-name=azuretestbuild --build-number=1 
-      jf go-publish v1.0.0 --build-name=azuretestbuild --build-number=1
-      jf rt bce azuretestbuild 1
-      jf rt bp azuretestbuild 1
+      jf go build 
+      jf go-publish v1.0.0
+      jf rt bce $(Build.DefinitionName) $(Build.BuildNumber)
+      jf rt build-publish $(Build.DefinitionName) $(Build.BuildNumber)
 - task: JFrogGo@1
   inputs:
     command: 'build'
