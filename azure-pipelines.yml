@@ -7,7 +7,7 @@ trigger:
 
 
 pool:
-  vmImage: macOS-latest
+  vmImage: windows-latest
 
 resources:
 - repo: self
