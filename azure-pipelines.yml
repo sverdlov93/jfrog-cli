@@ -27,7 +27,7 @@ steps:
   inputs:
     jfrogPlatformConnection: 'JFrog Platform V2'
     command: |
-      jf go-config --repo-resolve=go-remote --repo-deploy=go-local
+      jf go-config --repo-resolve=go-remote --repo-deploy=go-local 
       jf go build --build-name=azuretestbuild --build-number=1 
       jf go-publish v1.0.0 --build-name=azuretestbuild --build-number=1
       jf rt bce azuretestbuild 1
