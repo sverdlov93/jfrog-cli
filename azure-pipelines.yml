@@ -46,7 +46,17 @@ steps:
     licenses: false
     allowFailBuild: true
 
-
+- task: JFrogMaven@1
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'install'
+    artifactoryResolverService: 'jfrog v2 extension ecosys'
+    targetResolveReleaseRepo: 'maven-virtual'
+    targetResolveSnapshotRepo: 'maven-virtual'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    javaHomeOption: 'JDKVersion'
 - task: JfrogCliV2@1
   inputs:
     jfrogPlatformConnection: 'JFrog Platform V2'
