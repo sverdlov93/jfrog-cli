@@ -16,26 +16,6 @@ variables:
   tag: '$(Build.BuildId)'
 
 steps:  
-- task: JFrogMaven@1
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'install'
-    artifactoryResolverService: 'jfrog v2 extension ecosys'
-    targetResolveReleaseRepo: 'maven-virtual'
-    targetResolveSnapshotRepo: 'maven-virtual'
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    javaHomeOption: 'JDKVersion'
-- task: TerraformInstaller@1
-  inputs:
-    terraformVersion: 'latest'
-- task: JfrogCliV2@1
-  inputs:
-    jfrogPlatformConnection: 'JFrog Platform V2'
-    command: |
-      jf terraform-config --repo-deploy=terraform-remote 
-      jf terraform publish --namespace=example --provider=aws --tag=v0.0.1
 
 - task: JfrogCliV2@1
   inputs:
