@@ -1406,7 +1406,7 @@ var flagsMap = map[string]cli.Flag{
 	},
 	repoPath: cli.StringFlag{
 		Name:  repoPath,
-		Usage: "[Optional] Target repo path, to enable Xray to determine watches accordingly.` `",
+		Usage: "[Optional] Target repository path, to enable Xray to determine violations accordingly.` `",
 	},
 	scanRecursive: cli.BoolTFlag{
 		Name:  recursive,
