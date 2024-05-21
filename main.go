@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"github.com/jfrog/jfrog-cli/general/ai"
 	"github.com/jfrog/jfrog-client-go/http/httpclient"
@@ -71,6 +73,103 @@ func main() {
 	coreutils.ExitOnErr(err)
 }
 
+// Command is a subcommand for a cli.App.
+type Command struct {
+	// The name of the command
+	Name string
+	// short name of the command. Typically one character (deprecated, use `Aliases`)
+	ShortName string
+	// A list of aliases for the command
+	Aliases []string
+	// A short description of the usage of this command
+	Usage string
+	// Custom text to show on USAGE section of help
+	UsageText string
+	// A longer explanation of how the command works
+	Description string
+	// A short description of the arguments of this command
+	ArgsUsage string
+	// The category the command is part of
+	Category string
+	// The function to call when checking for bash command completions
+	BashComplete cli.BashCompleteFunc `json:"-"`
+	// An action to execute before any sub-subcommands are run, but after the context is ready
+	// If a non-nil error is returned, no sub-subcommands are run
+	Before cli.BeforeFunc `json:"-"`
+	// An action to execute after any subcommands are run, but after the subcommand has finished
+	// It is run even if Action() panics
+	After cli.AfterFunc `json:"-"`
+	// The function to call when this command is invoked
+	Action interface{} `json:"-"`
+	// TODO: replace `Action: interface{}` with `Action: ActionFunc` once some kind
+	// of deprecation period has passed, maybe?
+
+	// Execute this function if a usage error occurs.
+	OnUsageError cli.OnUsageErrorFunc `json:"-"`
+	// List of child commands
+	Subcommands Commands
+	// List of flags to parse
+	Flags []cli.Flag
+	// Treat all flags as normal arguments if true
+	SkipFlagParsing bool
+	// Skip argument reordering which attempts to move flags before arguments,
+	// but only works if all flags appear after all arguments. This behavior was
+	// removed n version 2 since it only works under specific conditions so we
+	// backport here by exposing it as an option for compatibility.
+	SkipArgReorder bool
+	// Boolean to hide built-in help command
+	HideHelp bool
+	// Boolean to hide this command from help or completion
+	Hidden bool
+	// Boolean to enable short-option handling so user can combine several
+	// single-character bool arguments into one
+	// i.e. foobar -o -v -> foobar -ov
+	UseShortOptionHandling bool
+
+	// Full name of command for help, defaults to full command name, including parent commands.
+	HelpName        string
+	commandNamePath []string
+
+	// CustomHelpTemplate the text template for the command help topic.
+	// cli.go uses text/template to render templates. You can
+	// render custom help text by setting this variable.
+	CustomHelpTemplate string
+}
+
+type MyCommand struct {
+	Name        string      `json:"name,omitempty"`
+	ShortName   string      `json:"shortName,omitempty"`
+	Description string      `json:"description,omitempty"`
+	Args        string      `json:"args,omitempty"`
+	Usage       string      `json:"usage,omitempty"`
+	Subcommands []MyCommand `json:"subcommands,omitempty"`
+	Flags       []MyFlag    `json:"flags,omitempty"`
+}
+
+type MyFlag struct {
+	Name  string `json:"name,omitempty"`
+	Usage string `json:"usage,omitempty"`
+}
+
+// Copy function for Command
+func CopyCommand(com1 cli.Command) MyCommand {
+	com2 := MyCommand{}
+	com2.Name = com1.Name
+	if len(com1.Aliases) > 0 {
+		com2.ShortName = com1.Aliases[0]
+	}
+	com2.Usage = com1.HelpName
+	com2.Description = com1.Usage
+	com2.Args = com1.UsageText
+	for _, flag := range com1.Flags {
+		com2.Flags = append(com2.Flags, MyFlag{Name: flag.GetName(), Usage: flag.String()})
+	}
+	return com2
+}
+
+// Commands is a slice of Command
+type Commands []Command
+
 func execMain() error {
 	// Set JFrog CLI's user-agent on the jfrog-client-go.
 	clientutils.SetUserAgent(coreutils.GetCliUserAgent())
@@ -83,10 +182,43 @@ func execMain() error {
 	cliutils.SetCliExecutableName(args[0])
 	app.EnableBashCompletion = true
 	commands, err := getCommands()
-	if err != nil {
-		clientlog.Error(err)
-		os.Exit(1)
+
+	allCommands := make(map[string][]MyCommand)
+
+	for _, com := range commands {
+		if com.Hidden {
+			continue
+		}
+		myCom := CopyCommand(com)
+		for _, sub := range com.Subcommands {
+			if sub.Hidden {
+				continue
+			}
+			mySub := CopyCommand(sub)
+			for _, subsub := range sub.Subcommands {
+				if subsub.Hidden {
+					continue
+				}
+				mySubSub := CopyCommand(subsub)
+				mySub.Subcommands = append(mySub.Subcommands, mySubSub)
+			}
+			myCom.Subcommands = append(myCom.Subcommands, mySub)
+		}
+		if com.Category == "" {
+			com.Category = otherCategory
+		}
+		allCommands[com.Category] = append(allCommands[com.Category], myCom)
 	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	encoder.SetIndent("", "  ")
+	err = encoder.Encode(allCommands)
+	if err != nil {
+		panic(err)
+	}
+	jsonStr := buffer.String()
+	jsonStr = jsonStr
 	sort.Slice(commands, func(i, j int) bool { return commands[i].Name < commands[j].Name })
 	app.Commands = commands
 	cli.CommandHelpTemplate = commandHelpTemplate
