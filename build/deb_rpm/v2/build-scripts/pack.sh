@@ -251,8 +251,8 @@ setBuildImage(){
 
 	case "$1" in
 		x86_64)
-			RPM_BUILD_IMAGE="centos:7"
-			DEB_BUILD_IMAGE="ubuntu:16.04"
+			RPM_BUILD_IMAGE="almalinux:8.10"
+			DEB_BUILD_IMAGE="ubuntu:20.04"
 		;;
 		*)
 			errorExit "Provided architecture is not supported : $arch. Supported list [ ${SUPPORTED_DEFAULT_ARCH_LIST} ]"
@@ -324,9 +324,9 @@ main(){
 
 	: "${flavours:="rpm deb"}"
 	: "${JFROG_CLI_RUN_TEST:="false"}"
-	: "${RPM_BUILD_IMAGE:="centos:8"}"
-	: "${RPM_SIGN_IMAGE:="centos:7"}"
-	: "${DEB_BUILD_IMAGE:="ubuntu:16.04"}"
+	: "${RPM_BUILD_IMAGE:="almalinux:8.10"}"
+	: "${RPM_SIGN_IMAGE:="almalinux:8.10"}"
+	: "${DEB_BUILD_IMAGE:="ubuntu:20.04"}"
 	: "${DEB_TEST_IMAGE:="${DEB_BUILD_IMAGE}"}"
 	: "${RPM_TEST_IMAGE:="${RPM_BUILD_IMAGE}"}"
 	: "${JFROG_CLI_RELEASE_VERSION:="1"}"
